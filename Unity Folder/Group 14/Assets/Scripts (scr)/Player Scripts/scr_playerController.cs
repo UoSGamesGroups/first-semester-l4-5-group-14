@@ -67,7 +67,18 @@ public class scr_playerController : MonoBehaviour {
 		moveDirection.y -= gravity * Time.deltaTime;
 		controller.Move(moveDirection * Time.deltaTime);
 
+        // Die
+        if (transform.position.y <= -5) {
+            StartCoroutine(Die());
+        }
+
 	}
+
+    IEnumerator Die() {
+        Debug.Log("Dead");
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(0);
+    }
 
 	#region Detect Puzzle Trigger
 	void OnTriggerEnter(Collider coll) {
