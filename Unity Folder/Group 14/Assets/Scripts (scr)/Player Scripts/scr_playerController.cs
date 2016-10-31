@@ -20,6 +20,8 @@ public class scr_playerController : MonoBehaviour {
 	public bool inPuzzleTrigger = false;
 	public int currentLevel = 0;
 	public int levelToLoad = 0;
+    public GameObject playerLight;
+    public bool isLightEnabled = false;
 
     [Header("Key Controls")]
     public string interactKey = "E";
@@ -34,6 +36,7 @@ public class scr_playerController : MonoBehaviour {
 		controller = GetComponent<CharacterController> ();
 		inPuzzleTrigger = false;
 		actionKeyText.enabled = false;
+        
 	}
 
 	void Awake() {
@@ -72,6 +75,21 @@ public class scr_playerController : MonoBehaviour {
             StartCoroutine(Die());
         }
 
+        if (Input.GetKeyDown(KeyCode.L) && !isLightEnabled)
+        {
+            //playerLight.SetActive(true);
+            isLightEnabled = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.L) && isLightEnabled) {
+            isLightEnabled = false;
+        }
+
+        if (isLightEnabled) {
+            playerLight.SetActive(true);
+        }
+        else if (!isLightEnabled) {
+            playerLight.SetActive(false);
+        }
 	}
 
     IEnumerator Die() {
