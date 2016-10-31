@@ -12,4 +12,7 @@ public class scr_bookcase : MonoBehaviour {
 	void Update () {
 	
 	}
+
+
+
 }
