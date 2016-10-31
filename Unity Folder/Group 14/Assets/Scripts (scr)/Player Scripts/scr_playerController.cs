@@ -63,7 +63,8 @@ public class scr_playerController : MonoBehaviour {
 		}
 
 		if (inPuzzleTrigger && Input.GetKeyDown(KeyCode.E)) {
-			Debug.Log("Press F to pay respects.");
+            //Debug.Log("Press F to pay respects.");
+            Debug.Log(levelToLoad);
 			SceneManager.LoadScene (levelToLoad);
 		}
 
