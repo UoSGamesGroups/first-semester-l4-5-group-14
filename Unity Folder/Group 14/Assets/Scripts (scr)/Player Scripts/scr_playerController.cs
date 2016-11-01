@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;					// Do the UI stuff using external scripts, its not required to be here.
-using UnityEngine.SceneManagement;		// Later remove as its not needed here; call using external script or GameManager.
+using UnityEngine.SceneManagement;			// Later remove as its not needed here; call using external script or GameManager.
 using System.Collections;
 
 public class scr_playerController : MonoBehaviour {
@@ -17,25 +17,27 @@ public class scr_playerController : MonoBehaviour {
 	public float speed = 6f;
 	public float jumpSpeed = 8f;
 	public float gravity = 20f;		// Gravity can be changed, based on the level.
-	public bool inPuzzleTrigger = false;
 	public int currentLevel = 0;
 	public int levelToLoad = 0;
-    public GameObject playerLight;
-    public bool isLightEnabled = false;
+    	public GameObject playerLight;
 
-    [Header("Key Controls")]
-    public string interactKey = "E";
-
-	[Header("GUI Settings")]
+	[Header("GUI")]
 	public Text actionKeyText;
+	public Text doorLocked;
 
 	private Vector3 moveDirection = Vector3.zero;
 	private CharacterController controller;
 
 	void Start () {
 		controller = GetComponent<CharacterController> ();
-		inPuzzleTrigger = false;
 		actionKeyText.enabled = false;
+		doorLocked.enabled = false;
+
+		if (scr_gameManager.GameManager.isLightEnabled) {
+			playerLight.SetActive(true);
+		} else {
+			playerLight.SetActive(false);
+		}
         
 	}
 
@@ -62,54 +64,54 @@ public class scr_playerController : MonoBehaviour {
 			#endregion
 		}
 
-		if (inPuzzleTrigger && Input.GetKeyDown(KeyCode.E)) {
-            //Debug.Log("Press F to pay respects.");
-            Debug.Log(levelToLoad);
-			SceneManager.LoadScene (levelToLoad);
-		}
+
 
 		moveDirection.y -= gravity * Time.deltaTime;
 		controller.Move(moveDirection * Time.deltaTime);
 
-        // Die
-        if (transform.position.y <= -5) {
-            StartCoroutine(Die());
-        }
+	        if (transform.position.y <= -5) {
+	            StartCoroutine(Die());
+		}
 
-        if (Input.GetKeyDown(KeyCode.L) && !isLightEnabled)
-        {
-            //playerLight.SetActive(true);
-            isLightEnabled = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.L) && isLightEnabled) {
-            isLightEnabled = false;
-        }
-
-        if (isLightEnabled) {
-            playerLight.SetActive(true);
-        }
-        else if (!isLightEnabled) {
-            playerLight.SetActive(false);
-        }
+		if (Input.GetKeyDown(KeyCode.L) && !scr_gameManager.GameManager.isLightEnabled) {
+			scr_gameManager.GameManager.isLightEnabled = true;
+			playerLight.SetActive(true);
+	        }
+		else if (Input.GetKeyDown(KeyCode.L) && scr_gameManager.GameManager.isLightEnabled) {
+			scr_gameManager.GameManager.isLightEnabled = false;
+			playerLight.SetActive(false);
+	        }
+	}
+    
+	IEnumerator Die() {
+	        Debug.Log("Dead");
+	        yield return new WaitForSeconds(2);
+		SceneManager.LoadScene(0);
 	}
 
-    IEnumerator Die() {
-        Debug.Log("Dead");
-        yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(0);
-    }
+	#region Detect Triggers
+	void OnTriggerStay(Collider coll) {
+		if (coll.gameObject.tag == "puzzleTrigger") {
+			actionKeyText.enabled = true;
+			if (Input.GetKeyDown(KeyCode.E)) {
+				scr_gameManager.GameManager.isInPuzzle = true;
+				SceneManager.LoadScene (levelToLoad);
+			}
+		}
 
-	#region Detect Puzzle Trigger
-	void OnTriggerEnter(Collider coll) {
-		Debug.Log("Current Level: " + currentLevel + ". Level to Load: " + levelToLoad);
-		actionKeyText.enabled = true;
-		inPuzzleTrigger = true;
+		if (coll.gameObject.tag == "doorTrigger") {
+			if (scr_gameManager.GameManager.isDoorOpen) {
+				actionKeyText.enabled = true;
+			} else if (!scr_gameManager.GameManager.isDoorOpen) {
+				doorLocked.enabled = true;
+			}
+		}
+
 	}
 
 	void OnTriggerExit(Collider coll) {
 		actionKeyText.enabled = false;
-        actionKeyText.text = "Press '" + interactKey + "' to interact.";
-		inPuzzleTrigger = false;
+		doorLocked.enabled = false;
 	}
 	#endregion
 }
