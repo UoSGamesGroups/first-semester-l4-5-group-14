@@ -71,5 +71,8 @@
     <Compile Include="Assets\Scripts (scr)\scr_gameManager.cs" />
     <Compile Include="Assets\Scripts (scr)\scr_puzzleManager.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Imported\Dust Particles\Dust Particles Credit.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
