@@ -20,6 +20,7 @@ public class scr_playerController : MonoBehaviour {
     public int currentLevel = 0;
     public int levelToLoad = 0;
     public GameObject playerLight;
+    //public GameObject dustParticles;
 
     [Header("GUI")]
     public Text actionKeyText;
@@ -35,8 +36,10 @@ public class scr_playerController : MonoBehaviour {
 
         if (scr_gameManager.GameManager.isLightEnabled) {
             playerLight.SetActive(true);
+            //dustParticles.SetActive(true);
         } else {
             playerLight.SetActive(false);
+            //dustParticles.SetActive(false);
         }
         
     }
