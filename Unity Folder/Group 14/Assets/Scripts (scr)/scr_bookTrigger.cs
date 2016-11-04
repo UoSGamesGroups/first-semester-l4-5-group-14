@@ -32,8 +32,9 @@ public class scr_bookTrigger : MonoBehaviour {
         if (coll.gameObject.tag == bookName)
         {
             //rb.velocity = new Vector3(0, 0, 0);
-            //rb.useGravity = false;
+            rb.useGravity = false;
             //rb.mass = 0.00001f;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
             if (scr_gameManager.GameManager.isDragging == false) {
                 gameObject.transform.position = coll.transform.position;
                 float currPosX = transform.position.x;
@@ -46,7 +47,9 @@ public class scr_bookTrigger : MonoBehaviour {
         else {
             //rb.velocity = new Vector3(0, 0, 0);
             //rb.mass = 1;
-            //rb.useGravity = true;
+            rb.useGravity = true;
+            rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezeRotationZ;
         }
     }
 }
