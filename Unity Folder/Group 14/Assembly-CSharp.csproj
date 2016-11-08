@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts (scr)\Player Scripts\scr_followMouse.cs" />
      <Compile Include="Assets\Scripts (scr)\Player Scripts\scr_playerController.cs" />
      <Compile Include="Assets\Scripts (scr)\Reusable\changeLevel.cs" />
+     <Compile Include="Assets\Scripts (scr)\homing_mite.cs" />
      <Compile Include="Assets\Scripts (scr)\menue_script.cs" />
      <Compile Include="Assets\Scripts (scr)\mouseClick.cs" />
      <Compile Include="Assets\Scripts (scr)\scr_bookTrigger.cs" />
