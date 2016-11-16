@@ -4,11 +4,12 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts (scr)\Player Scripts\scr_playerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts (scr)\scr_DrawOutline.cs">
     <Files>
       <File FileName="Assets\Scripts (scr)\Player Scripts\scr_playerController.cs" Line="3" Column="38" />
       <File FileName="Assets\Scripts (scr)\scr_gameManager.cs" Line="21" Column="3" />
-      <File FileName="Assets\Scripts (scr)\scr_puzzleManager.cs" Line="29" Column="32" />
+      <File FileName="Assets\Scripts (scr)\scr_puzzleManager.cs" Line="29" Column="17" />
+      <File FileName="Assets\Scripts (scr)\scr_DrawOutline.cs" Line="16" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
 </Properties>
