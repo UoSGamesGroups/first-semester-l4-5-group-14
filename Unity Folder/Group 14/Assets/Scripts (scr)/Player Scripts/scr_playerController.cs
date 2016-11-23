@@ -97,7 +97,7 @@ public class scr_playerController : MonoBehaviour {
         if (coll.gameObject.tag == "puzzleTrigger") {
             actionKeyText.enabled = true;
             if (Input.GetKeyDown(KeyCode.E)) {
-                scr_gameManager.GameManager.isInPuzzle = true;
+				scr_gameManager.GameManager.lockMouse = true;
                 SceneManager.LoadScene (levelToLoad);
             }
         }

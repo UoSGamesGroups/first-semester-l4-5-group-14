@@ -22,7 +22,7 @@ public class scr_puzzleManager : MonoBehaviour {
 			booksCount += 1;
 		}
 
-		scr_gameManager.GameManager.isInPuzzle = true;
+		scr_gameManager.GameManager.lockMouse = true;
 		completeText.enabled = false;
 	}
 
@@ -48,7 +48,7 @@ public class scr_puzzleManager : MonoBehaviour {
 
 	IEnumerator PuzzleEnd () {
 		yield return new WaitForSeconds (5);
-		scr_gameManager.GameManager.isInPuzzle = false;
+		scr_gameManager.GameManager.lockMouse = false;
 		scr_gameManager.GameManager.puzzleComplete = true;
 		SceneManager.LoadScene ("scn_test01");
 	}
