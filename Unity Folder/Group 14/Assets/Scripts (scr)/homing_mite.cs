@@ -11,26 +11,24 @@ public class homing_mite : MonoBehaviour
     public float maxDistance = 2;
 
 
-    void Start()
-    {
+    void Start() {
         GetComponent<Rigidbody>().velocity = transform.forward * speed;
-        Books = GameObject.FindWithTag("book").transform;
-
     }
-    void Update()
-    {
+    void Update(){
+        //if (scr_gameManager.GameManager.isDragging)
+        //    Books = GetComponent<mouseClick>().raycastHit;
+        //else
+            Books = GameObject.FindWithTag("book").transform;
+
         if (Vector3.Distance(transform.position, Books.position) > maxDistance)
-        {
             transform.position += (Books.position - transform.position).normalized * moveSpeed * Time.deltaTime;
-        }
-
-        {
-            //Destroy(gameObject, 3.0f);
-        }
+        else if (Books == null)
+            transform.position += new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime;
+        else
+            return;
     }
 
-    void OnTriggerEnter(Collider others)
-    {
+    void OnTriggerEnter(Collider others) {
         Destroy(others.gameObject);
         Destroy(gameObject);
     }

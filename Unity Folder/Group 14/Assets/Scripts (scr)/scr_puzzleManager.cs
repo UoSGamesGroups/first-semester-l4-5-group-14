@@ -15,7 +15,10 @@ public class scr_puzzleManager : MonoBehaviour {
 	public Text scoreText;
 	public Text completeText;
 
+    public int loadSceneID = 0;
+
 	void Start () {
+        scr_gameManager.GameManager.isInPuzzle = true;
 		GameObject[] books = GameObject.FindGameObjectsWithTag("book");
 
 		foreach (GameObject go in books) {
@@ -46,10 +49,10 @@ public class scr_puzzleManager : MonoBehaviour {
 		StartCoroutine(PuzzleEnd());
 	}
 
-	IEnumerator PuzzleEnd () {
-		yield return new WaitForSeconds (5);
-		scr_gameManager.GameManager.lockMouse = false;
-		scr_gameManager.GameManager.puzzleComplete = true;
-		SceneManager.LoadScene ("scn_test01");
-	}
+    IEnumerator PuzzleEnd() {
+        yield return new WaitForSeconds(5);
+        scr_gameManager.GameManager.isInPuzzle = true;
+        scr_gameManager.GameManager.puzzleComplete = true;
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+    }
 }

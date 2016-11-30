@@ -14,18 +14,19 @@ public class scr_gameManager : MonoBehaviour {
 	public bool isDoorOpen = false;
 	public bool lockMouse = false;
 	public bool puzzleComplete = false;
+    public bool isInPuzzle = false;
+    public bool isSpawned = false;
 
 	[Header("Puzzle Specific")]
 	public bool isDragging = false;
 
 	[Header("SpawnPlayer")]
-	public Camera menuCamera;
 	public GameObject playerPrefab;
 	public Transform spawnPoint;
-	public Canvas menuCanvas;
 	public Canvas mainCanvas;
+    public GameObject pressSpace;
 
-	private float speed = 1f;
+    private float speed = 1f;
 	private float startTime;
 	private float journeyLength;
 
@@ -34,10 +35,11 @@ public class scr_gameManager : MonoBehaviour {
 	}
 
 	void Start () {
-		mainCanvas.enabled = false;
-		menuCanvas.enabled = true;
-		startTime = Time.time;
-		journeyLength = Vector3.Distance(menuCamera.transform.position, spawnPoint.transform.position);
+        Vector3 spawnPoint = new Vector3(0, 1, 0);
+        pressSpace = GameObject.Find("pressSpace");
+        if (mainCanvas != null)
+		    mainCanvas.enabled = false;
+        startTime = Time.time;
 		lockMouse = false;
 	}
 
@@ -51,18 +53,21 @@ public class scr_gameManager : MonoBehaviour {
 	}
 
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space))
+		if(Input.GetKeyDown(KeyCode.Space) && !isSpawned)
 			SpawnPlayer();
 
-		if (lockMouse) {
+		if (!isInPuzzle) {
 			Cursor.lockState = CursorLockMode.Confined;
 			Cursor.visible = false;
-		} else if (!lockMouse) {
+		} else if (isInPuzzle)  {
 			Cursor.lockState = CursorLockMode.Confined;
 			Cursor.visible = true;
 		} else {
-			Debug.LogError ("WTF? isInPuzzle bool error. Fix plz.");
+            return;
 		}
+
+        if (isInPuzzle)
+            lockMouse = false;
 
 		if (puzzleComplete) {
 			isDoorOpen = true;
@@ -71,16 +76,15 @@ public class scr_gameManager : MonoBehaviour {
 
 	// Ideally move this part to some sort of Menu Manager.
 	public void SpawnPlayer() {
-		Debug.Log("SpawnPlayer()");
-		mainCanvas.enabled = true;
-		menuCanvas.enabled = false;
-		float distCovered = (Time.time - startTime) * speed;
-		float fracJourney = distCovered / journeyLength;
-		menuCamera.transform.position = Vector3.Lerp(menuCamera.transform.position, spawnPoint.transform.position, fracJourney);
-		menuCamera.gameObject.transform.LookAt(spawnPoint);
+        isSpawned = true;
+        Debug.Log("SpawnPlayer()");
+
+        if (mainCanvas != null)
+		    mainCanvas.enabled = true;
+        if (pressSpace != null)
+            pressSpace.SetActive(false);
+
 		new WaitForSeconds(2);
 		Instantiate(playerPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
-		menuCamera.enabled = false;
-
 	}
 }

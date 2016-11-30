@@ -19,7 +19,6 @@ public class scr_bookTrigger : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody>();
         gameObject.layer = bookLayer;
-        Physics.IgnoreLayerCollision(bookLayer, bookLayer, true);
     }
 
     void Update() {
@@ -31,11 +30,12 @@ public class scr_bookTrigger : MonoBehaviour {
     void OnTriggerStay (Collider coll) {
         if (coll.gameObject.tag == bookName)
         {
-            //rb.velocity = new Vector3(0, 0, 0);
             rb.useGravity = false;
-            //rb.mass = 0.00001f;
             rb.constraints = RigidbodyConstraints.FreezeAll;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             if (scr_gameManager.GameManager.isDragging == false) {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
                 gameObject.transform.position = coll.transform.position;
                 float currPosX = transform.position.x;
                 float currPosY = transform.position.y;
@@ -45,8 +45,6 @@ public class scr_bookTrigger : MonoBehaviour {
             }
         }
         else {
-            //rb.velocity = new Vector3(0, 0, 0);
-            //rb.mass = 1;
             rb.useGravity = true;
             rb.constraints = RigidbodyConstraints.None;
             rb.constraints = RigidbodyConstraints.FreezeRotationZ;
