@@ -45,21 +45,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts (scr)\MenuManager.cs" />
-     <Compile Include="Assets\Scripts (scr)\Player Scripts\scr_cameraController.cs" />
-     <Compile Include="Assets\Scripts (scr)\Player Scripts\scr_followMouse.cs" />
-     <Compile Include="Assets\Scripts (scr)\Player Scripts\scr_playerController.cs" />
-     <Compile Include="Assets\Scripts (scr)\Reusable\changeLevel.cs" />
-     <Compile Include="Assets\Scripts (scr)\homing_mite.cs" />
-     <Compile Include="Assets\Scripts (scr)\menue_script.cs" />
-     <Compile Include="Assets\Scripts (scr)\mouseClick.cs" />
-     <Compile Include="Assets\Scripts (scr)\scr_DrawOutline.cs" />
-     <Compile Include="Assets\Scripts (scr)\scr_bookTrigger.cs" />
-     <Compile Include="Assets\Scripts (scr)\scr_bookcase.cs" />
-     <Compile Include="Assets\Scripts (scr)\scr_gameManager.cs" />
-     <Compile Include="Assets\Scripts (scr)\scr_puzzleManager.cs" />
+     <Compile Include="Assets\Scripts\MenuManager.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\scr_cameraController.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\scr_followMouse.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\scr_playerController.cs" />
+     <Compile Include="Assets\Scripts\Reusable\changeLevel.cs" />
+     <Compile Include="Assets\Scripts\homing_mite.cs" />
+     <Compile Include="Assets\Scripts\menue_script.cs" />
+     <Compile Include="Assets\Scripts\mouseClick.cs" />
+     <Compile Include="Assets\Scripts\scr_DrawOutline.cs" />
+     <Compile Include="Assets\Scripts\scr_bookTrigger.cs" />
+     <Compile Include="Assets\Scripts\scr_bookcase.cs" />
+     <Compile Include="Assets\Scripts\scr_gameManager.cs" />
+     <Compile Include="Assets\Scripts\scr_puzzleManager.cs" />
      <None Include="Assets\Credit\Dust Particles Credit.txt" />
-     <None Include="Assets\Notes\notes so I dont forget.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
