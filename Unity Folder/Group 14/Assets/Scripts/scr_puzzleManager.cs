@@ -7,17 +7,17 @@ public class scr_puzzleManager : MonoBehaviour {
 
 	public static scr_puzzleManager PuzzleManager = null;
 
-	[Header("Books")]
-	public int booksCount = 0;
-	public int booksComplete = 0;
-
 	[Header("Puzzle GUI")]
 	public Text scoreText;
 	public Text completeText;
 
     public int loadSceneID = 0;
 
-	void Start () {
+    [HideInInspector]
+    public int booksCount = 0;
+    public int booksComplete = 0;
+
+    void Start () {
         scr_gameManager.GameManager.isInPuzzle = true;
 		GameObject[] books = GameObject.FindGameObjectsWithTag("book");
 

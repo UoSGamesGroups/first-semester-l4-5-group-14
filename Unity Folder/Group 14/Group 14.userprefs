@@ -4,23 +4,16 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\scr_puzzleManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MapManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\scr_bookTrigger.cs" Line="18" Column="38" />
-      <File FileName="Assets\Scripts\homing_mite.cs" Line="36" Column="7" />
-      <File FileName="Assets\Scripts\scr_puzzleManager.cs" Line="43" Column="20" />
+      <File FileName="Assets\Scripts\scr_gameManager.cs" Line="29" Column="5" />
+      <File FileName="Assets\Scripts\scr_puzzleManager.cs" Line="19" Column="5" />
+      <File FileName="Assets\Scripts\MapManager.cs" Line="27" Column="32" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Group 14" expanded="True">
-            <Node name="Assembly-CSharp" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="Reusable" expanded="True" />
-                <Node name="scr_puzzleManager.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
+          <Node name="Group 14" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>

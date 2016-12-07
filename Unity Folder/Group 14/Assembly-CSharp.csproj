@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\MapManager.cs" />
      <Compile Include="Assets\Scripts\MenuManager.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\scr_cameraController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\scr_followMouse.cs" />
@@ -54,11 +55,14 @@
      <Compile Include="Assets\Scripts\menue_script.cs" />
      <Compile Include="Assets\Scripts\mouseClick.cs" />
      <Compile Include="Assets\Scripts\scr_DrawOutline.cs" />
+     <Compile Include="Assets\Scripts\scr_WoodPlanks.cs" />
      <Compile Include="Assets\Scripts\scr_bookTrigger.cs" />
      <Compile Include="Assets\Scripts\scr_bookcase.cs" />
      <Compile Include="Assets\Scripts\scr_gameManager.cs" />
      <Compile Include="Assets\Scripts\scr_puzzleManager.cs" />
+     <None Include="Assets\Notes.txt" />
      <None Include="Assets\Credit\Dust Particles Credit.txt" />
+     <None Include="Assets\Shaders\GlassShader.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -20,34 +20,17 @@ public class scr_playerController : MonoBehaviour {
     public int currentLevel = 0;
     public int levelToLoad = 0;
     public GameObject playerLight;
-    //public GameObject dustParticles;
-
-    [Header("GUI")]
-    public GameObject actionKeyText;
-    public GameObject doorLockedText;
-    //public GameObject pressSpace;
 
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
 
     void Start () {
-        actionKeyText = GameObject.Find("actionKeyText");
-        doorLockedText = GameObject.Find("doorLockedText");
         controller = GetComponent<CharacterController> ();
-
-        if(actionKeyText != null)
-            actionKeyText.SetActive(false);
-
-        if(doorLockedText != null)
-            doorLockedText.SetActive(false);
-
 
         if (scr_gameManager.GameManager.isLightEnabled) {
             playerLight.SetActive(true);
-            //dustParticles.SetActive(true);
         } else {
             playerLight.SetActive(false);
-            //dustParticles.SetActive(false);
         }
         
     }
@@ -103,8 +86,10 @@ public class scr_playerController : MonoBehaviour {
     #region Detect Triggers
     void OnTriggerStay(Collider coll) {
         if (coll.gameObject.tag == "puzzleTrigger") {
-            actionKeyText.SetActive(true);
+            scr_gameManager.GameManager.inActionTrigger = true;
+            scr_gameManager.GameManager.playerPos = transform.position;
             if (Input.GetKeyDown(KeyCode.E)) {
+                scr_gameManager.GameManager.SavePosition( transform.position );
 				scr_gameManager.GameManager.lockMouse = true;
                 SceneManager.LoadScene (levelToLoad);
             }
@@ -112,17 +97,14 @@ public class scr_playerController : MonoBehaviour {
 
         if (coll.gameObject.tag == "doorTrigger") {
             if (scr_gameManager.GameManager.isDoorOpen) {
-                actionKeyText.SetActive(true);
             } else if (!scr_gameManager.GameManager.isDoorOpen) {
-                doorLockedText.SetActive(true);
             }
         }
 
     }
 
     void OnTriggerExit(Collider coll) {
-        actionKeyText.SetActive(false);
-        doorLockedText.SetActive(false);
+        scr_gameManager.GameManager.inActionTrigger = false;
     }
     #endregion
 }

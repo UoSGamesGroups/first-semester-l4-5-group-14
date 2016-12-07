@@ -7,40 +7,41 @@ public class scr_gameManager : MonoBehaviour {
 
 	public static scr_gameManager GameManager = null;
 
-	[Header("Player Settings")]
+    [Header("Bools")]
 	public bool isLightEnabled = false;
-
-	[Header("General Game")]
-	public bool isDoorOpen = false;
-	public bool lockMouse = false;
-	public bool puzzleComplete = false;
+    public bool lockMouse = false;
     public bool isInPuzzle = false;
     public bool isSpawned = false;
+    public bool isDragging = false;
+	public bool isDoorOpen = false;
+	public bool puzzleComplete = false;
+    public bool inActionTrigger;
 
-	[Header("Puzzle Specific")]
-	public bool isDragging = false;
-
-	[Header("SpawnPlayer")]
+	[Header("Objects")]
+    public Transform spawnPoint;
 	public GameObject playerPrefab;
-	public Transform spawnPoint;
-	public Canvas mainCanvas;
-    public GameObject pressSpace;
+    public Text doorLocked;
+    public Text interactKey;
+    public Text pressSpace;
 
-    private float speed = 1f;
-	private float startTime;
-	private float journeyLength;
+    [HideInInspector]
+    public Vector3 playerPos = Vector3.zero;
+
+    private Vector3 playerRot = new Vector3( 0, 180, 0 );
 
 	private scr_gameManager () {
 		
 	}
 
 	void Start () {
-        Vector3 spawnPoint = new Vector3(0, 1, 0);
-        pressSpace = GameObject.Find("pressSpace");
-        if (mainCanvas != null)
-		    mainCanvas.enabled = false;
-        startTime = Time.time;
-		lockMouse = false;
+        if (!isInPuzzle) {
+            doorLocked.enabled = false;
+            interactKey.enabled = false;
+            lockMouse = false;
+        }
+
+        if (!isSpawned && !isInPuzzle)
+            playerPos = spawnPoint.transform.position;
 	}
 
 	void Awake () {
@@ -56,6 +57,7 @@ public class scr_gameManager : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Space) && !isSpawned)
 			SpawnPlayer();
 
+        #region MouseLock
 		if (!isInPuzzle) {
 			Cursor.lockState = CursorLockMode.Confined;
 			Cursor.visible = false;
@@ -65,26 +67,37 @@ public class scr_gameManager : MonoBehaviour {
 		} else {
             return;
 		}
+        #endregion
 
-        if (isInPuzzle)
-            lockMouse = false;
-
-		if (puzzleComplete) {
-			isDoorOpen = true;
-		}
+        #region GUIDetection
+        if (inActionTrigger && !isInPuzzle) {
+            interactKey.enabled = true;
+        } else if (!isInPuzzle) {
+            interactKey.enabled = false;
+        }
+        #endregion
 	}
 
-	// Ideally move this part to some sort of Menu Manager.
+    public void SavePosition(Vector3 playerPosition) {
+        playerPos = playerPosition;
+    }
+
 	public void SpawnPlayer() {
-        isSpawned = true;
-        Debug.Log("SpawnPlayer()");
+        if (!isSpawned) {
+            Debug.Log( "Spawn New Player" );
 
-        if (mainCanvas != null)
-		    mainCanvas.enabled = true;
-        if (pressSpace != null)
-            pressSpace.SetActive(false);
+            new WaitForSeconds( 2 );
+            MapManager.mapManager.menuCamera.SetActive( false );
+            pressSpace.enabled = false;
+            Instantiate( playerPrefab, playerPos, Quaternion.Euler( playerRot.x, playerRot.y, playerRot.z ));
+            isSpawned = true;
+        } else if (isSpawned) {
+            Debug.Log( "Load Player" );
 
-		new WaitForSeconds(2);
-		Instantiate(playerPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            new WaitForSeconds( 2 );
+            MapManager.mapManager.menuCamera.SetActive( false );
+            pressSpace.enabled = false;
+            Instantiate( playerPrefab, playerPos, Quaternion.Euler(playerRot.x, playerRot.y, playerRot.z));
+        }
 	}
 }
