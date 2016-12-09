@@ -20,20 +20,22 @@ public class homing_mite : MonoBehaviour
         //else
             Books = GameObject.FindWithTag("book").transform;
 
-        if (Vector3.Distance(transform.position, Books.position) > maxDistance)
-            transform.position += (Books.position - transform.position).normalized * moveSpeed * Time.deltaTime;
-        else if (Books == null)
-            transform.position += new Vector3(0, 1, 0) * moveSpeed * Time.deltaTime;
-        else
+      //  if (Vector3.Distance(transform.position, Books.position) > maxDistance)
+        //    transform.position += (Books.position - transform.position).normalized * moveSpeed * Time.deltaTime;
+       // else if (Books == null)
+            transform.position += new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
+       // else
             return;
     }
 
-    //void OnTriggerEnter(Collider others) {
-    //    if (others.gameObject.layer != 8) {
-    //        Destroy( others.gameObject );
-    //        Destroy( gameObject );
-    //    }
-    //}
+    void OnTriggerEnter(Collider others)
+    {
+       if (others.gameObject.layer != 8)
+        {
+            Destroy(others.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }
 
 
