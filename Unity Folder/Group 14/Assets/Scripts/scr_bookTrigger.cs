@@ -44,6 +44,7 @@ public class scr_bookTrigger : MonoBehaviour {
                 gameObject.transform.position =new Vector3(currPosX, currPosY, 1.35f);
                 scr_puzzleManager.PuzzleManager.booksComplete += 1;
                 bookColour = "complete";
+                Destroy( coll.gameObject );
             }
         }
         else {
